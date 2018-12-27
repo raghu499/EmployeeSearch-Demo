@@ -1,3 +1,7 @@
+<div class="top">
+<h1>Enter Employee Details <button  (click)="onClose()" style="float: right;"> <mat-icon>clear</mat-icon></button> </h1>
+
+</div>
 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
   <div formGroupName="userData">
     <div class="row">
@@ -46,7 +50,7 @@
           <div class="add-bottom-padding">
             <mat-radio-group formControlName="gender">
               <mat-radio-button value="1">Male</mat-radio-button>
-              <mat-radio-button value="2">Female </mat-radio-button>
+              <mat-radio-button value="2" style="margin-left: 20px;">Female </mat-radio-button>
               <mat-radio-button value="3">Other</mat-radio-button>
             </mat-radio-group>
           </div>
@@ -68,10 +72,10 @@
           </mat-form-field>
 
           <br />
-          <div class="button-row">
-            <button [disabled]="!signupForm.valid" class="button" color="primary" type="submit" mat-button>Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
-            <button mat-raised-button color="warn" (click)="onClear()">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;
-            <button mat-raised-button (click)="onClose()">Close</button>
+          <div class="button-row" >
+            <button [disabled]="!signupForm.valid" class="button" style="background-color:rgb(14, 64, 230);" type="submit" mat-button>Submit</button>            
+            <button mat-raised-button style="background-color:rgb(38, 211, 38); margin-left: 30px;" class="button" (click)="onClear()">Clear</button>
+            
           </div>
 
         </div>
