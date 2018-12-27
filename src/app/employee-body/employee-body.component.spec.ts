@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomelayoutComponent } from './homelayout.component';
+import { EmployeeBodyComponent } from './employee-body.component';
 
-describe('HomelayoutComponent', () => {
-  let component: HomelayoutComponent;
-  let fixture: ComponentFixture<HomelayoutComponent>;
+describe('EmployeeBodyComponent', () => {
+  let component: EmployeeBodyComponent;
+  let fixture: ComponentFixture<EmployeeBodyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomelayoutComponent ]
+      declarations: [ EmployeeBodyComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomelayoutComponent);
+    fixture = TestBed.createComponent(EmployeeBodyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
