@@ -1,84 +1,81 @@
 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-    <div formGroupName="userData"> 
-       <div class="row">
-           <div class="column" >
-           
-               <div class="example-container">
-                 <mat-form-field appearance="outline">
-                   <mat-label>First Name</mat-label>
-                   <input matInput id="fname" formControlName="fname" class="form-control">
-                 </mat-form-field>
-                 <span *ngIf="!signupForm.get('userData.fname').valid && signupForm.get('userData.fname').touched" class="help-block">Please
-                     Enter First Name</span>
-   
-   
-                 <mat-form-field appearance="outline">
-                   <mat-label>Last Name</mat-label>
-                   <input matInput id="lname" formControlName="lname" class="form-control">                
-                 </mat-form-field>
-                 <span *ngIf="!signupForm.get('userData.lname').valid && signupForm.get('userData.lname').touched" class="help-block">Please
-                     Enter Last Name</span>
-   
-     
-                 <mat-form-field appearance="outline" class="example-container">
-                   <mat-label>Email Id</mat-label>
-                   <input matInput id="email" formControlName="email" class="form-control">
-                 </mat-form-field>
-                 <span *ngIf="!signupForm.get('userData.email').valid && signupForm.get('userData.email').touched" class="help-block">Please
-                     enter a valid email!</span>
-     
-                 <mat-form-field appearance="outline">
-                   <mat-label>Mobile Number</mat-label>
-                   <input matInput id="mobile" formControlName="mobile" class="form-control">
-                 </mat-form-field>
-                 <span *ngIf="!signupForm.get('userData.mobile').valid && signupForm.get('userData.mobile').touched" class="help-block">Please
-                     Enter Mobile Number!</span>
-   
-              </div>
-            
-        </div> 
-     
-             <div class="column">
-               <div class="example-container">
-                 <mat-form-field appearance="outline">
-                   <mat-label>City</mat-label>
-                   <input matInput id="city" formControlName="city" class="form-control">
-                 </mat-form-field>
-                 <span *ngIf="!signupForm.get('userData.city').valid && signupForm.get('userData.city').touched" class="help-block">Please
-                    Enter City!</span>
-                <div class="add-bottom-padding">
-                 <mat-radio-group formControlName="gender">
-                   <mat-radio-button value="1">Male</mat-radio-button>
-                   <mat-radio-button value="2">Female </mat-radio-button>
-                   <mat-radio-button value="3">Other</mat-radio-button>
-                 </mat-radio-group>
-                 </div>
-                 <br />
-     
-                 <mat-form-field appearance="outline">
-                   <mat-label>Department</mat-label>
-                   <mat-select #depid value="Development" formControlName="dep"  [(value)]="selected">
-                     <mat-option value="Dev">Development</mat-option>
-                     <mat-option value="test">Testing</mat-option>
-                     <mat-option value="mark">Marketing</mat-option>
-                   </mat-select>
-                 </mat-form-field>             
-     
-                 <mat-form-field>
-                   <input matInput [matDatepicker]="picker" placeholder="Hire Date"  formControlName="hireDate">
-                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                   <mat-datepicker #picker></mat-datepicker>
-                 </mat-form-field>
-            
-               <br />
-                 <div class="button-row">
-                   <button [disabled]="!signupForm.valid" class="button" color="primary" type="submit" mat-button>Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                   <button mat-raised-button color="warn" (click)="onClear()">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                   <button mat-raised-button (click)="onClose()">Close</button>
-                 </div>
-            
-               </div>
-             </div>
-       </div>
+  <div formGroupName="userData">
+    <div class="row">
+      <div class="column">
+
+        <div class="example-container">
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput id="fname" formControlName="fname" class="form-control">
+            <mat-hint><mat-error *ngIf="!signupForm.get('userData.fname').valid && signupForm.get('userData.fname').touched" class="help-block">Please Enter First Name</mat-error></mat-hint>
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput id="lname" formControlName="lname" class="form-control">
+            <mat-hint><mat-error *ngIf="!signupForm.get('userData.lname').valid && signupForm.get('userData.lname').touched" class="help-block">Please Enter Last Name</mat-error></mat-hint>
+          </mat-form-field>
+          
+
+
+          <mat-form-field appearance="outline" class="example-container">
+            <mat-label>Email Id</mat-label>
+            <input matInput id="email" formControlName="email" class="form-control">
+            <mat-hint><mat-error *ngIf="!signupForm.get('userData.email').valid && signupForm.get('userData.email').touched" class="help-block">Please enter a valid email!</mat-error> </mat-hint>
+          </mat-form-field>
+          
+
+          <mat-form-field appearance="outline">
+            <mat-label>Mobile Number</mat-label>
+            <input matInput id="mobile" formControlName="mobile" class="form-control">
+            <mat-hint>  <mat-error *ngIf="!signupForm.get('userData.mobile').valid && signupForm.get('userData.mobile').touched" class="help-block">Please Enter Mobile Number!</mat-error> </mat-hint>
+          </mat-form-field>
+
         </div>
-     </form>
+
+      </div>
+
+      <div class="column">
+        <div class="example-container">
+          <mat-form-field appearance="outline">
+            <mat-label>City</mat-label>
+            <input matInput id="city" formControlName="city" class="form-control">
+            <mat-hint><mat-error *ngIf="!signupForm.get('userData.city').valid && signupForm.get('userData.city').touched" class="help-block">Please Enter City!</mat-error></mat-hint>
+          </mat-form-field>
+          
+          <div class="add-bottom-padding">
+            <mat-radio-group formControlName="gender">
+              <mat-radio-button value="1">Male</mat-radio-button>
+              <mat-radio-button value="2">Female </mat-radio-button>
+              <mat-radio-button value="3">Other</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <br />
+
+          <mat-form-field appearance="outline">
+            <mat-label>Department</mat-label>
+            <mat-select #depid value="Development" formControlName="dep" [(value)]="selected">
+              <mat-option value="Dev">Development</mat-option>
+              <mat-option value="test">Testing</mat-option>
+              <mat-option value="mark">Marketing</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Hire Date" formControlName="hireDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <br />
+          <div class="button-row">
+            <button [disabled]="!signupForm.valid" class="button" color="primary" type="submit" mat-button>Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button color="warn" (click)="onClear()">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button (click)="onClose()">Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

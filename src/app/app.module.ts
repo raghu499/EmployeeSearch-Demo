@@ -1,3 +1,4 @@
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -8,12 +9,13 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule,
    MatIconModule, MatListModule, MatCardModule, MatDialogModule,
    MatFormFieldModule, MatInputModule, MatSelectModule, MatGridListModule, 
-    MatDatepickerModule, MatCheckboxModule, MatNativeDateModule, MatRadioModule } from '@angular/material';
+    MatDatepickerModule, MatCheckboxModule, MatNativeDateModule, MatRadioModule, MatTableModule } from '@angular/material';
 import { BrowserAnimationsModule } from '../../node_modules/@angular/platform-browser/animations';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { EmployeeBodyComponent } from './employee-body/employee-body.component';
 import { DialogContentComponent } from './dialog-content/dialog-content.component';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
+import { DatePipe } from '../../node_modules/@angular/common';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,6 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
     ToolbarComponent,
     EmployeeBodyComponent,
     DialogContentComponent
-    
   ],
   imports: [
     BrowserModule,
@@ -46,12 +47,15 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
     MatCheckboxModule,
     MatNativeDateModule,
     MatRadioModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxDatatableModule,
+    MatTableModule
+    
   ],
   entryComponents: [
     DialogContentComponent
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
