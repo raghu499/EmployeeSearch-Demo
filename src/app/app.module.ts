@@ -9,7 +9,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule,
    MatIconModule, MatListModule, MatCardModule, MatDialogModule,
    MatFormFieldModule, MatInputModule, MatSelectModule, MatGridListModule, 
-    MatDatepickerModule, MatCheckboxModule, MatNativeDateModule, MatRadioModule, MatTableModule } from '@angular/material';
+    MatDatepickerModule, MatCheckboxModule, MatNativeDateModule, MatRadioModule, MatTableModule, MatPaginatorModule } from '@angular/material';
 import { BrowserAnimationsModule } from '../../node_modules/@angular/platform-browser/animations';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { EmployeeBodyComponent } from './employee-body/employee-body.component';
@@ -49,7 +49,8 @@ import { DatePipe } from '../../node_modules/@angular/common';
     MatRadioModule,
     HttpClientModule,
     NgxDatatableModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
     
   ],
   entryComponents: [
