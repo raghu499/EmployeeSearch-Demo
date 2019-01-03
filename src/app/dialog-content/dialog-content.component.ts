@@ -61,7 +61,7 @@ export class DialogContentComponent implements OnInit {
       .subscribe(
         res => {
           console.log(res);
-          this.result = 'Registration was Successful'
+          this.result = 'Registration was Successful...'
         },
         err => {
           console.log('Error occured');

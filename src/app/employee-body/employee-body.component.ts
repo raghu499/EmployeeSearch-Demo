@@ -67,9 +67,9 @@ export class EmployeeBodyComponent implements OnInit {
   }
 
   //Method to call when delete button clicked
-  onDelete($empid) {
+  onDelete(email) {
     if (confirm('Are you sure to delete this record ?')) {
-      this.service.deleteEmployee($empid);
+      this.service.deleteEmployee(email);
     }
   }
 
