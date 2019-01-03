@@ -20,21 +20,11 @@ export class EmployeeBodyComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
 
-  // data = [
-  //   { fullName: 'SNS Raghu Babu', email: 'raghu@gmail.com', mobile: 9491124558, city: 'Bhimavaram', departmentName: 'Development' },
-  //   { fullName: 'Mani Babu', email: 'mani@gmail.com', mobile: 9490024558, city: 'RJY', departmentName: 'Development' },
-  //   { fullName: 'Gopal', email: 'gopal@gmail.com', mobile: 9491124008, city: 'BVRT', departmentName: 'Development' },
-  // ];
-
-
+ 
   //to load the records when page is loaded
   ngOnInit() {
-        // this.listData = new MatTableDataSource(this.data);
-        // this.listData.sort = this.sort;
-        // this.listData.paginator = this.paginator; 
-
-
-    this.http.get('http://172.17.15.21:3000/getProducts')
+        
+    this.http.get('http://localhost:4210/assets/EmployeeData.json')
       .subscribe((response) => {
         this.EmployeeDetails = response as string[];
         this.rows = response;

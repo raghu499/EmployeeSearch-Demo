@@ -91,7 +91,8 @@ export class EmployeeService {
   }
 
   populateForm(employee) {
-    this.form.setValue(_.omit(employee,'departmentName'));
+    // this.form.setValue(_.omit(employee,'departmentName'));
+    this.form.setValue(employee);
   }
 
 }

@@ -31,8 +31,9 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Mobile Number</mat-label>
-            <input matInput id="mobile" formControlName="mobile" class="form-control">
-            <mat-hint>  <mat-error *ngIf="!signupForm.get('userData.mobile').valid && signupForm.get('userData.mobile').touched" class="help-block">Please Enter Mobile Number!</mat-error> </mat-hint>
+            <input matInput id="mobile" formControlName="mobile" class="form-control" >
+            <mat-hint>  <mat-error *ngIf="!signupForm.get('userData.mobile').valid && signupForm.get('userData.mobile').touched"
+               class="help-block">Please Enter Valid Mobile Number!</mat-error> </mat-hint>
           </mat-form-field>
 
         </div>

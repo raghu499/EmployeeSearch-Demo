@@ -26,7 +26,7 @@ export class DialogContentComponent implements OnInit {
   result = '';
   
 
-
+//
 
   signupForm: FormGroup;
   //here we are validating the input fields
@@ -36,7 +36,7 @@ export class DialogContentComponent implements OnInit {
         'fname': new FormControl(null, [Validators.required]),
         'lname': new FormControl(null, [Validators.required]),
         'email': new FormControl(null, [Validators.required, Validators.email]),
-        'mobile': new FormControl(null, [Validators.required]),
+        'mobile': new FormControl(null, [Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
         'city' : new FormControl(null, [Validators.required]),
         'gender': new FormControl('1'),
         'dep': new FormControl(null),
@@ -48,7 +48,7 @@ export class DialogContentComponent implements OnInit {
   //In this method we will post the data to the target URL with input data.
   onSubmit() {
     console.log(this.signupForm.value.userData);
-    this.http.post('http://172.17.20.19:3000/postProduct', {
+    this.http.post('http://172.17.15.21:3000/postProduct', {
       fname: this.signupForm.value.userData.fname,
       lname: this.signupForm.value.userData.lname,
       email: this.signupForm.value.userData.email,
