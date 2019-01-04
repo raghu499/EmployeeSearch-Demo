@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { DatePipe } from '../../node_modules/@angular/common';
 import * as _ from 'lodash';
+import { fillProperties } from '../../node_modules/@angular/core/src/util/property';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class EmployeeService {
   rows;
 
   form: FormGroup = new FormGroup({
-    $empid: new FormControl(null),
-    fullName: new FormControl('', Validators.required),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
     email: new FormControl('', Validators.email),
     mobile: new FormControl('', [Validators.required, Validators.minLength(8)]),
     city: new FormControl(''),
@@ -24,18 +25,18 @@ export class EmployeeService {
     hireDate: new FormControl('')
   });
 
-  initializeFormGroup() {
-    this.form.setValue({
-      $empid: null,
-      fullName: '',
-      email: '',
-      mobile: '',
-      city: '',
-      gender: '1',
-      department: 0,
-      hireDate: ''
-    });
-  }
+  //initializeFormGroup() {
+  //   this.form.setValue({
+  //     $empid: null,
+  //     fullName: '',
+  //     email: '',
+  //     mobile: '',
+  //     city: '',
+  //     gender: '1',
+  //     department: 0,
+  //     hireDate: ''
+  //   });
+  // }
 
   getEmployees() {
     this.http.get('http://172.17.20.19:3000/getProducts')

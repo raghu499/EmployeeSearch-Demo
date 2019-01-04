@@ -15,7 +15,7 @@ export class EmployeeBodyComponent implements OnInit {
 
   //filtered data displaying conditions
   listData: MatTableDataSource<any>;
-  displayedColumns: string[] = ['fullName', 'email', 'mobile', 'city', 'departmentName', 'actions'];
+  displayedColumns: string[] = ['FirstName', 'LastName','Email', 'Phone', 'City', 'Dept', 'Actions'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
@@ -24,16 +24,20 @@ export class EmployeeBodyComponent implements OnInit {
   //to load the records when page is loaded
   ngOnInit() {
         
-    this.http.get('http://localhost:4210/assets/EmployeeData.json')
-      .subscribe((response) => {
-        this.EmployeeDetails = response as string[];
-        this.rows = response;
-        console.log(this.rows);
+    this.getData()
+  }
 
-        this.listData = new MatTableDataSource(this.rows);
-        this.listData.sort = this.sort;
-        this.listData.paginator = this.paginator;
-      });
+  getData() {
+    this.http.get('http://localhost:3000/emp/getallemployees')
+    .subscribe((response) => {
+      this.EmployeeDetails = response as string[];
+      this.rows = response;
+      console.log(JSON.stringify(this.rows));
+
+      this.listData = new MatTableDataSource(this.rows.employees);
+      this.listData.sort = this.sort;
+      this.listData.paginator = this.paginator;
+    });
   }
 
   //this method is for displaying the dialog box for registring the new Employee
@@ -45,6 +49,7 @@ export class EmployeeBodyComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      this.getData()
     });
   }
 
@@ -56,10 +61,11 @@ export class EmployeeBodyComponent implements OnInit {
 
   //method for on edit button click 
   onEdit(row) {
-    this.service.populateForm(row);
+    //this.service.populateForm(row);
     const dialogRef = this.dialog.open(DialogContentComponent, {
       height: '500px',
       width: '800px',
+      data:row
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -70,7 +76,10 @@ export class EmployeeBodyComponent implements OnInit {
   onDelete(email) {
     if (confirm('Are you sure to delete this record ?')) {
       this.service.deleteEmployee(email);
+      this.http.delete('http://172.17.15.21:3000/delete/' + email )
+      .subscribe(data => { }),
+      this.ngOnInit();
+    };
     }
-  }
 
 }

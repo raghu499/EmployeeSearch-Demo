@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '../../../node_modules/@angular/material';
+import { Component, OnInit,Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '../../../node_modules/@angular/material';
 import { DatePipe } from '../../../node_modules/@angular/common';
 
 @Component({
@@ -13,7 +13,7 @@ export class DialogContentComponent implements OnInit {
 
   selected='Dev';
 
-  constructor( public dialogRef: MatDialogRef<DialogContentComponent>,private http: HttpClient, private datePipe: DatePipe) {}
+  constructor( public dialogRef: MatDialogRef<DialogContentComponent>,private http: HttpClient, private datePipe: DatePipe,@Inject(MAT_DIALOG_DATA) public data: any) {}
 
   onClose() {
     this.signupForm.reset();
@@ -31,6 +31,15 @@ export class DialogContentComponent implements OnInit {
   signupForm: FormGroup;
   //here we are validating the input fields
   ngOnInit() {
+    console.log(this.data)
+    // this.signupForm.value.userData.fname = this.data.fname
+    // this.signupForm.value.userData.lname = this.data.lname
+    // this.signupForm.value.userData.email= this.data.email 
+    // this.signupForm.value.userData.mobile= this.data.mobile
+    // this.signupForm.value.userData.city= this.data.city
+    // this.signupForm.value.userData.gender= this.data.gender
+    // this.signupForm.value.userData.dept= this.data.dept 
+    // this.signupForm.value.userData.hireData= this.data.hireData 
     this.signupForm = new FormGroup({
       'userData': new FormGroup({
         'fname': new FormControl(null, [Validators.required]),
@@ -39,7 +48,7 @@ export class DialogContentComponent implements OnInit {
         'mobile': new FormControl(null, [Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
         'city' : new FormControl(null, [Validators.required]),
         'gender': new FormControl('1'),
-        'dep': new FormControl(null),
+        'dept': new FormControl(null),
         'hireDate': new FormControl('')
       }),
 
@@ -47,21 +56,23 @@ export class DialogContentComponent implements OnInit {
   }
   //In this method we will post the data to the target URL with input data.
   onSubmit() {
-    console.log(this.signupForm.value.userData);
-    this.http.post('http://172.17.15.21:3000/postProduct', {
-      fname: this.signupForm.value.userData.fname,
-      lname: this.signupForm.value.userData.lname,
-      email: this.signupForm.value.userData.email,
-      mobile: this.signupForm.value.userData.mobile,
-      city : this.signupForm.value.city,
-      gender: this.signupForm.value.gender,
-      department: this.signupForm.value.department,
-     // hireDate: this.signupForm.value.hireDate == "" ? "" : this.datePipe.transform( this.signupForm.value.hireDate, 'yyyy-MM-dd'),
+    //console.log(this.signupForm.value.userData);
+    this.http.post('http://localhost:3000/emp/postemployee', {
+      FirstName: this.signupForm.value.userData.fname,
+      LastName: this.signupForm.value.userData.lname,
+      Email: this.signupForm.value.userData.email,
+      Phone: this.signupForm.value.userData.mobile,
+      City : this.signupForm.value.userData.city,
+      Gender: this.signupForm.value.userData.gender,
+      Dept: this.signupForm.value.userData.dept,
+      HireDate: this.signupForm.value.userData.hireDate == "" ? "" : this.datePipe.transform( this.signupForm.value.userData.hireDate, 'yyyy-MM-dd'),
+      //HireDate: this.signupForm.value.userData.hireDate,
     })
       .subscribe(
         res => {
           console.log(res);
           this.result = 'Registration was Successful...'
+          this.dialogRef.close();
         },
         err => {
           console.log('Error occured');

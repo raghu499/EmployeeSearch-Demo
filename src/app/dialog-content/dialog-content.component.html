@@ -50,19 +50,19 @@
           
           <div class="add-bottom-padding">
             <mat-radio-group formControlName="gender">
-              <mat-radio-button value="1">Male</mat-radio-button>
-              <mat-radio-button value="2" style="margin-left: 20px;">Female </mat-radio-button>
-              <mat-radio-button value="3">Other</mat-radio-button>
+              <mat-radio-button value="Male">Male</mat-radio-button>
+              <mat-radio-button value="Female" style="margin-left: 20px;">Female </mat-radio-button>
+             
             </mat-radio-group>
           </div>
           <br />
 
           <mat-form-field appearance="outline">
             <mat-label>Department</mat-label>
-            <mat-select #depid value="Development" formControlName="dep" [(value)]="selected">
-              <mat-option value="Dev">Development</mat-option>
-              <mat-option value="test">Testing</mat-option>
-              <mat-option value="mark">Marketing</mat-option>
+            <mat-select #depid value="Development" formControlName="dept" [(value)]="selected">
+              <mat-option value="Development">Development</mat-option>
+              <mat-option value="Testing">Testing</mat-option>
+              <mat-option value="Marketing">Marketing</mat-option>
             </mat-select>
           </mat-form-field>
 
@@ -75,11 +75,11 @@
           <br />
           <div class="button-row" >
             <button [disabled]="!signupForm.valid" class="button" style="background-color:rgb(14, 64, 230);" type="submit" mat-button>Submit</button>            
-
+<!-- <p>{{result}}</p> -->
             <button mat-raised-button style="background-color:rgb(38, 211, 38); margin-left: 30px;" class="button" (click)="onClear()">Clear</button>
-           <!-- <p>{{result}}</p> -->
+           
           </div>
-         
+          <!-- <p>{{result}}</p> -->
         </div>
       </div>
     </div>
