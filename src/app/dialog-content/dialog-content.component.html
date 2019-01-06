@@ -8,31 +8,32 @@
       <div class="column">
 
         <div class="example-container">
+            <input type="hidden" formControlName="Id">
           <mat-form-field appearance="outline">
             <mat-label>First Name</mat-label>
-            <input matInput id="fname" formControlName="fname" class="form-control">
-            <mat-hint><mat-error *ngIf="!signupForm.get('userData.fname').valid && signupForm.get('userData.fname').touched" class="help-block">Please Enter First Name</mat-error></mat-hint>
+            <input matInput id="fname" formControlName="FirstName" class="form-control">
+            <mat-hint><mat-error *ngIf="!signupForm.get('userData.FirstName').valid && signupForm.get('userData.FirstName').touched" class="help-block">Please Enter First Name</mat-error></mat-hint>
           </mat-form-field>
           
           <mat-form-field appearance="outline">
             <mat-label>Last Name</mat-label>
-            <input matInput id="lname" formControlName="lname" class="form-control">
-            <mat-hint><mat-error *ngIf="!signupForm.get('userData.lname').valid && signupForm.get('userData.lname').touched" class="help-block">Please Enter Last Name</mat-error></mat-hint>
+            <input matInput id="lname" formControlName="LastName" class="form-control">
+            <mat-hint><mat-error *ngIf="!signupForm.get('userData.LastName').valid && signupForm.get('userData.LastName').touched" class="help-block">Please Enter Last Name</mat-error></mat-hint>
           </mat-form-field>
           
 
 
           <mat-form-field appearance="outline" class="example-container">
             <mat-label>Email Id</mat-label>
-            <input matInput id="email" formControlName="email" class="form-control">
-            <mat-hint><mat-error *ngIf="!signupForm.get('userData.email').valid && signupForm.get('userData.email').touched" class="help-block">Please enter a valid email!</mat-error> </mat-hint>
+            <input matInput id="email" formControlName="Email" class="form-control">
+            <mat-hint><mat-error *ngIf="!signupForm.get('userData.Email').valid && signupForm.get('userData.Email').touched" class="help-block">Please enter a valid email!</mat-error> </mat-hint>
           </mat-form-field>
           
 
           <mat-form-field appearance="outline">
             <mat-label>Mobile Number</mat-label>
-            <input matInput id="mobile" formControlName="mobile" class="form-control" >
-            <mat-hint>  <mat-error *ngIf="!signupForm.get('userData.mobile').valid && signupForm.get('userData.mobile').touched"
+            <input matInput id="mobile" formControlName="Phone" class="form-control" >
+            <mat-hint>  <mat-error *ngIf="!signupForm.get('userData.Phone').valid && signupForm.get('userData.Phone').touched"
                class="help-block">Please Enter Valid Mobile Number!</mat-error> </mat-hint>
           </mat-form-field>
 
@@ -44,12 +45,12 @@
         <div class="example-container">
           <mat-form-field appearance="outline">
             <mat-label>City</mat-label>
-            <input matInput id="city" formControlName="city" class="form-control">
-            <mat-hint><mat-error *ngIf="!signupForm.get('userData.city').valid && signupForm.get('userData.city').touched" class="help-block">Please Enter City!</mat-error></mat-hint>
+            <input matInput id="city" formControlName="City" class="form-control">
+            <mat-hint><mat-error *ngIf="!signupForm.get('userData.City').valid && signupForm.get('userData.City').touched" class="help-block">Please Enter City!</mat-error></mat-hint>
           </mat-form-field>
           
           <div class="add-bottom-padding">
-            <mat-radio-group formControlName="gender">
+            <mat-radio-group formControlName="Gender">
               <mat-radio-button value="Male">Male</mat-radio-button>
               <mat-radio-button value="Female" style="margin-left: 20px;">Female </mat-radio-button>
              
@@ -59,7 +60,7 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Department</mat-label>
-            <mat-select #depid value="Development" formControlName="dept" [(value)]="selected">
+            <mat-select #depid value="Development" formControlName="Dept" [(value)]="selected">
               <mat-option value="Development">Development</mat-option>
               <mat-option value="Testing">Testing</mat-option>
               <mat-option value="Marketing">Marketing</mat-option>
@@ -67,7 +68,7 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Hire Date" formControlName="hireDate">
+            <input matInput [matDatepicker]="picker" placeholder="Hire Date" formControlName="HireDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>

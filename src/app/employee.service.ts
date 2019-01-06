@@ -15,28 +15,30 @@ export class EmployeeService {
   rows;
 
   form: FormGroup = new FormGroup({
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.email),
-    mobile: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    city: new FormControl(''),
-    gender: new FormControl('1'),
-    department: new FormControl(0),
-    hireDate: new FormControl('')
+    Id: new FormControl(null),
+    FirstName: new FormControl('', Validators.required),
+    LastName: new FormControl('', Validators.required),
+    Email: new FormControl('', Validators.email),
+    Phone: new FormControl('', Validators.required),
+    City: new FormControl(''),
+    Gender: new FormControl(''),
+    Dept: new FormControl(''),
+    HireDate: new FormControl('')
   });
 
-  //initializeFormGroup() {
-  //   this.form.setValue({
-  //     $empid: null,
-  //     fullName: '',
-  //     email: '',
-  //     mobile: '',
-  //     city: '',
-  //     gender: '1',
-  //     department: 0,
-  //     hireDate: ''
-  //   });
-  // }
+  initializeFormGroup() {
+    this.form.setValue({
+      Id: null,
+      FirstName: '',
+      LastName: '',
+      Email: '',
+      Phone: '',
+      City: '',
+      Gender: '',
+      Dept: '',
+      HireDate: ''
+    });
+  }
 
   getEmployees() {
     this.http.get('http://172.17.20.19:3000/getProducts')
@@ -93,7 +95,8 @@ export class EmployeeService {
 
   populateForm(employee) {
     // this.form.setValue(_.omit(employee,'departmentName'));
-    this.form.setValue(employee);
+    this.form.setValue(_.omit(employee,'isDeleted'));
+    console.log(employee);
   }
 
 }

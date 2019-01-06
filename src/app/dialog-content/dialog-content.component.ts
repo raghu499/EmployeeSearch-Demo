@@ -31,8 +31,8 @@ export class DialogContentComponent implements OnInit {
   signupForm: FormGroup;
   //here we are validating the input fields
   ngOnInit() {
-    console.log(this.data)
-    // this.signupForm.value.userData.fname = this.data.fname
+    console.log("Check this--",this.signupForm);
+    //this.signupForm.value.userData.FirstName = this.data.employee.FirstName;
     // this.signupForm.value.userData.lname = this.data.lname
     // this.signupForm.value.userData.email= this.data.email 
     // this.signupForm.value.userData.mobile= this.data.mobile
@@ -42,14 +42,15 @@ export class DialogContentComponent implements OnInit {
     // this.signupForm.value.userData.hireData= this.data.hireData 
     this.signupForm = new FormGroup({
       'userData': new FormGroup({
-        'fname': new FormControl(null, [Validators.required]),
-        'lname': new FormControl(null, [Validators.required]),
-        'email': new FormControl(null, [Validators.required, Validators.email]),
-        'mobile': new FormControl(null, [Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-        'city' : new FormControl(null, [Validators.required]),
-        'gender': new FormControl('1'),
-        'dept': new FormControl(null),
-        'hireDate': new FormControl('')
+        'Id':new FormControl(null),
+        'FirstName': new FormControl(null, [Validators.required]),
+        'LastName': new FormControl(null, [Validators.required]),
+        'Email': new FormControl(null, [Validators.required, Validators.email]),
+        'Phone': new FormControl(null, [Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+        'City' : new FormControl(null, [Validators.required]),
+        'Gender': new FormControl(null),
+        'Dept': new FormControl(null),
+        'HireDate': new FormControl('')
       }),
 
     });
@@ -57,7 +58,7 @@ export class DialogContentComponent implements OnInit {
   //In this method we will post the data to the target URL with input data.
   onSubmit() {
     //console.log(this.signupForm.value.userData);
-    this.http.post('http://localhost:3000/emp/postemployee', {
+    this.http.post('http://localhost:3000/emp/insertEmployee', {
       FirstName: this.signupForm.value.userData.fname,
       LastName: this.signupForm.value.userData.lname,
       Email: this.signupForm.value.userData.email,

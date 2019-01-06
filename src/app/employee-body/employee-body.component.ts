@@ -15,7 +15,7 @@ export class EmployeeBodyComponent implements OnInit {
 
   //filtered data displaying conditions
   listData: MatTableDataSource<any>;
-  displayedColumns: string[] = ['FirstName', 'LastName','Email', 'Phone', 'City', 'Dept', 'Actions'];
+  displayedColumns: string[] = ['Id','FirstName', 'LastName','Email', 'Phone', 'City', 'Dept', 'Actions'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
@@ -24,15 +24,15 @@ export class EmployeeBodyComponent implements OnInit {
   //to load the records when page is loaded
   ngOnInit() {
         
-    this.getData()
+    this.getData();
   }
 
   getData() {
-    this.http.get('http://localhost:3000/emp/getallemployees')
+    this.http.get('http://localhost:3000/emp/getAllEmployees')
     .subscribe((response) => {
       this.EmployeeDetails = response as string[];
       this.rows = response;
-      console.log(JSON.stringify(this.rows));
+      //console.log(JSON.stringify(this.rows));
 
       this.listData = new MatTableDataSource(this.rows.employees);
       this.listData.sort = this.sort;
@@ -61,7 +61,7 @@ export class EmployeeBodyComponent implements OnInit {
 
   //method for on edit button click 
   onEdit(row) {
-    //this.service.populateForm(row);
+    this.service.populateForm(row);
     const dialogRef = this.dialog.open(DialogContentComponent, {
       height: '500px',
       width: '800px',
@@ -73,10 +73,10 @@ export class EmployeeBodyComponent implements OnInit {
   }
 
   //Method to call when delete button clicked
-  onDelete(email) {
+  onDelete(Id) {
     if (confirm('Are you sure to delete this record ?')) {
-      this.service.deleteEmployee(email);
-      this.http.delete('http://172.17.15.21:3000/delete/' + email )
+      this.service.deleteEmployee(Id);
+      this.http.delete('http://localhost:3000/emp/deleteEmployee/' + Id )
       .subscribe(data => { }),
       this.ngOnInit();
     };
