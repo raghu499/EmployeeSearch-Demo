@@ -1,3 +1,5 @@
+import { NotificationService } from './notification.service';
+import { EmployeeService } from './employee.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -10,7 +12,7 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule,
    MatIconModule, MatListModule, MatCardModule, MatDialogModule,
    MatFormFieldModule, MatInputModule, MatSelectModule, MatGridListModule, 
     MatDatepickerModule, MatCheckboxModule, MatNativeDateModule, MatRadioModule,
-     MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+     MatTableModule, MatPaginatorModule, MatSortModule, MatSnackBarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '../../node_modules/@angular/platform-browser/animations';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { EmployeeBodyComponent } from './employee-body/employee-body.component';
@@ -52,13 +54,14 @@ import { DatePipe } from '../../node_modules/@angular/common';
     NgxDatatableModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatSnackBarModule
     
   ],
   entryComponents: [
     DialogContentComponent
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,EmployeeService,NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

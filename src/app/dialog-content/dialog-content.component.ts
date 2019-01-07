@@ -1,8 +1,10 @@
+import { NotificationService } from './../notification.service';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Component, OnInit,Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '../../../node_modules/@angular/material';
 import { DatePipe } from '../../../node_modules/@angular/common';
+import { EmployeeService } from './../employee.service';
 
 @Component({
   selector: 'app-dialog-content',
@@ -13,15 +15,17 @@ export class DialogContentComponent implements OnInit {
 
   selected='Dev';
 
-  constructor( public dialogRef: MatDialogRef<DialogContentComponent>,private http: HttpClient, private datePipe: DatePipe,@Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor( private service: EmployeeService, private notificationService: NotificationService,public dialogRef: MatDialogRef<DialogContentComponent>,private http: HttpClient, private datePipe: DatePipe,@Inject(MAT_DIALOG_DATA) public data: any) {}
 
   onClose() {
     this.signupForm.reset();
     this.dialogRef.close();
+    this.notificationService.success('Dialog Box closed Successfully..');
   }
 
   onClear(){
       this.signupForm.reset();
+      this.notificationService.success('Data Cleared Successfully..');
   }
   result = '';
   
@@ -31,7 +35,8 @@ export class DialogContentComponent implements OnInit {
   signupForm: FormGroup;
   //here we are validating the input fields
   ngOnInit() {
-    console.log("Check this--",this.signupForm);
+  
+    //console.log("Check this--",this.data.signupForm.userData.FirstName);
     //this.signupForm.value.userData.FirstName = this.data.employee.FirstName;
     // this.signupForm.value.userData.lname = this.data.lname
     // this.signupForm.value.userData.email= this.data.email 
@@ -57,16 +62,16 @@ export class DialogContentComponent implements OnInit {
   }
   //In this method we will post the data to the target URL with input data.
   onSubmit() {
-    //console.log(this.signupForm.value.userData);
-    this.http.post('http://localhost:3000/emp/insertEmployee', {
-      FirstName: this.signupForm.value.userData.fname,
-      LastName: this.signupForm.value.userData.lname,
-      Email: this.signupForm.value.userData.email,
-      Phone: this.signupForm.value.userData.mobile,
-      City : this.signupForm.value.userData.city,
-      Gender: this.signupForm.value.userData.gender,
-      Dept: this.signupForm.value.userData.dept,
-      HireDate: this.signupForm.value.userData.hireDate == "" ? "" : this.datePipe.transform( this.signupForm.value.userData.hireDate, 'yyyy-MM-dd'),
+    //console.log(this.signupForm.value.userData);   
+    this.http.post('http://localhost:3000/emp/postemployee', {
+      FirstName: this.signupForm.value.userData.FirstName,
+      LastName: this.signupForm.value.userData.LastName,
+      Email: this.signupForm.value.userData.Email,
+      Phone: this.signupForm.value.userData.Phone,
+      City : this.signupForm.value.userData.City,
+      Gender: this.signupForm.value.userData.Gender,
+      Dept: this.signupForm.value.userData.Dept,
+      HireDate: this.signupForm.value.userData.HireDate == "" ? "" : this.datePipe.transform( this.signupForm.value.userData.HireDate, 'yyyy-MM-dd'),
       //HireDate: this.signupForm.value.userData.hireDate,
     })
       .subscribe(
@@ -74,8 +79,10 @@ export class DialogContentComponent implements OnInit {
           console.log(res);
           this.result = 'Registration was Successful...'
           this.dialogRef.close();
+          this.notificationService.success(':: Submitted successfully');
         },
         err => {
+         // this.notificationService.success(':: Data Not Submitted');
           console.log('Error occured');
           this.result = ' Registration was not successful'
         }

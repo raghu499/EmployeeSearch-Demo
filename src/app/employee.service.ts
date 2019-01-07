@@ -9,7 +9,7 @@ import { fillProperties } from '../../node_modules/@angular/core/src/util/proper
   providedIn: 'root'
 })
 export class EmployeeService {
-
+result;
   constructor(private http: HttpClient,private datePipe: DatePipe) { }
   employeeList: String[];
   rows;
@@ -59,44 +59,47 @@ export class EmployeeService {
   }
 
   insertEmployee(employee) {
-
-    this.http.post('http://172.17.20.19:3000/postProduct', {
-      fname: employee.value.userData.fname,
-      lname: employee.value.userData.lname,
-      email: employee.value.userData.email,
-      mobile: employee.value.userData.mobile,
-      city: employee.city,
-      gender: employee.gender,
-      department: employee.department,
-       //hireDate: employee.hireDate == "" ? "" : this.datePipe.transform(employee.hireDate, 'yyyy-MM-dd'),
-    });
-      
+    this.http.post('http://localhost:3000/emp/insertEmployee', {
+      Id:employee.Id,
+      FirstName: employee.FirstName,
+      LastName: employee.LastName,
+      Email: employee.Email,
+      Phone: employee.Phone,
+      City : employee.City,
+      Gender: employee.Gender,
+      Dept: employee.Dept,
+      HireDate: employee.HireDate == "" ? "" : this.datePipe.transform( employee.HireDate, 'yyyy-MM-dd'),
+    });    
   }
+
+
   // need to put the url for update  PUT method / EDIT button
   updateEmployee(employee) {
-    this.http.put(employee.$key,
-      {
-        fullName: employee.fullName,
-        email: employee.email,
-        mobile: employee.mobile,
-        city: employee.city,
-        gender: employee.gender,
-        department: employee.department,
-        // hireDate: employee.hireDate == "" ? "" : this.datePipe.transform(employee.hireDate, 'yyyy-MM-dd'),
-        
-      });
+    this.http.put('http://localhost:3000/emp/updateEmployee + employee.Id', {
+      Id:employee.Id,
+      FirstName: employee.FirstName,
+      LastName: employee.LastName,
+      Email: employee.Email,
+      Phone: employee.Phone,
+      City : employee.City,
+      Gender: employee.Gender,
+      Dept: employee.Dept,
+      HireDate: employee.HireDate == "" ? "" : this.datePipe.transform( employee.HireDate, 'yyyy-MM-dd'),
+    });    
+
+   
   }
 
 
   deleteEmployee($empid: string) {
-    this.http.delete('http://172.17.20.19:3000/delete/' + $empid )
+    this.http.delete('http://localhost:3000/delete/' + $empid )
     .subscribe(data => { });
   }
 
   populateForm(employee) {
     // this.form.setValue(_.omit(employee,'departmentName'));
     this.form.setValue(_.omit(employee,'isDeleted'));
-    console.log(employee);
+    console.log("in service",employee);
   }
 
 }

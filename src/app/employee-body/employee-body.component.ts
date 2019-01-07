@@ -1,3 +1,4 @@
+import { NotificationService } from './../notification.service';
 import { EmployeeService } from './../employee.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { DialogContentComponent } from './../dialog-content/dialog-content.component';
@@ -11,7 +12,7 @@ import { MatDialog, MatDialogConfig, MatTableDataSource, MatSort, MatPaginator }
 export class EmployeeBodyComponent implements OnInit {
   EmployeeDetails: string[];
   rows;
-  constructor(public dialog: MatDialog, private http: HttpClient, private service: EmployeeService) { }
+  constructor(public dialog: MatDialog, private http: HttpClient, private service: EmployeeService, private notificationService: NotificationService) { }
 
   //filtered data displaying conditions
   listData: MatTableDataSource<any>;
@@ -23,7 +24,7 @@ export class EmployeeBodyComponent implements OnInit {
  
   //to load the records when page is loaded
   ngOnInit() {
-        
+    
     this.getData();
   }
 
@@ -75,10 +76,11 @@ export class EmployeeBodyComponent implements OnInit {
   //Method to call when delete button clicked
   onDelete(Id) {
     if (confirm('Are you sure to delete this record ?')) {
-      this.service.deleteEmployee(Id);
+      //this.service.deleteEmployee(Id);
       this.http.delete('http://localhost:3000/emp/deleteEmployee/' + Id )
       .subscribe(data => { }),
       this.ngOnInit();
+      
     };
     }
 
