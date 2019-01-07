@@ -53,8 +53,7 @@ export class EmployeeBodyComponent implements OnInit {
       this.getData()
     });
   }
-
-
+  
   //method to search records
   updateFilter() {
     this.listData.filter = this.searchKey.trim().toLowerCase();
@@ -77,10 +76,9 @@ export class EmployeeBodyComponent implements OnInit {
   onDelete(Id) {
     if (confirm('Are you sure to delete this record ?')) {
       //this.service.deleteEmployee(Id);
-      this.http.delete('http://localhost:3000/emp/deleteEmployee/' + Id )
+      this.http.delete('http://localhost:3000/emp/deleteEmp/' + Id )
       .subscribe(data => { }),
       this.ngOnInit();
-      
     };
     }
 

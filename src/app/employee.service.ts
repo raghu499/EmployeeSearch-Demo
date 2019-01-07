@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
@@ -75,6 +76,7 @@ result;
 
   // need to put the url for update  PUT method / EDIT button
   updateEmployee(employee) {
+    
     this.http.put('http://localhost:3000/emp/updateEmployee + employee.Id', {
       Id:employee.Id,
       FirstName: employee.FirstName,
@@ -98,8 +100,10 @@ result;
 
   populateForm(employee) {
     // this.form.setValue(_.omit(employee,'departmentName'));
-    this.form.setValue(_.omit(employee,'isDeleted'));
+    // this.form.setValue(_.omit(employee,'isDeleted'));
     console.log("in service",employee);
+    this.form.setValue = employee
+
   }
 
 }

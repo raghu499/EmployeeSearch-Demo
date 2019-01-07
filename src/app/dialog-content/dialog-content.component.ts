@@ -29,22 +29,9 @@ export class DialogContentComponent implements OnInit {
   }
   result = '';
   
-
-//
-
   signupForm: FormGroup;
   //here we are validating the input fields
   ngOnInit() {
-  
-    //console.log("Check this--",this.data.signupForm.userData.FirstName);
-    //this.signupForm.value.userData.FirstName = this.data.employee.FirstName;
-    // this.signupForm.value.userData.lname = this.data.lname
-    // this.signupForm.value.userData.email= this.data.email 
-    // this.signupForm.value.userData.mobile= this.data.mobile
-    // this.signupForm.value.userData.city= this.data.city
-    // this.signupForm.value.userData.gender= this.data.gender
-    // this.signupForm.value.userData.dept= this.data.dept 
-    // this.signupForm.value.userData.hireData= this.data.hireData 
     this.signupForm = new FormGroup({
       'userData': new FormGroup({
         'Id':new FormControl(null),
@@ -59,11 +46,59 @@ export class DialogContentComponent implements OnInit {
       }),
 
     });
+if(this.data) {
+  this.fillForm(this.data);
+}
+  }
+
+  fillForm(employee) {
+    this.signupForm.controls.userData.patchValue({
+      Id:employee.Id,
+      FirstName: employee.FirstName,
+      LastName: employee.LastName,
+      Email: employee.Email,
+      Phone: employee.Phone,
+      City : employee.City,
+      Gender: employee.Gender,
+      Dept: employee.Dept,
+      HireDate: employee.HireDate == "" ? "" : this.datePipe.transform( employee.HireDate, 'yyyy-MM-dd'),
+    })
+    console.log("FillForm",this.signupForm.value.userData.FirstName)
+    console.log("with data", this.data.Id)
   }
   //In this method we will post the data to the target URL with input data.
   onSubmit() {
-    //console.log(this.signupForm.value.userData);   
-    this.http.post('http://localhost:3000/emp/postemployee', {
+    //if(this.data.Id !== null || this.data.Id !== undefined) {
+    if(this.data !== null) {
+      //put
+      this.http.put('http://localhost:3000/emp/updateEmployee + this.data.Id', {
+        Id:this.signupForm.value.userData.Id,
+        FirstName:  this.signupForm.value.userData.FirstName,
+        LastName: this.signupForm.value.userData.LastName,
+        Email: this.signupForm.value.userData.Email,
+        Phone: this.signupForm.value.userData.Phone,
+        City : this.signupForm.value.userData.City,
+        Gender: this.signupForm.value.userData.Gender,
+        Dept: this.signupForm.value.userData.Dept,
+        HireDate: this.signupForm.value.userData.HireDate == "" ? "" : this.datePipe.transform( this.signupForm.value.userData.HireDate, 'yyyy-MM-dd'),
+        
+      }).subscribe(
+        res => {
+          console.log(res);
+          this.result = 'Registration was Successful...'
+          this.dialogRef.close();
+          this.notificationService.success(':: Submitted successfully');
+        },
+        err => {
+          this.notificationService.success(':: Data Not Submitted');
+          console.log('Error occured');
+          this.result = ' Registration was not successful'
+        }
+      );
+     
+    } else {
+      //post
+      this.http.post('http://localhost:3000/emp/postemployee', {
       FirstName: this.signupForm.value.userData.FirstName,
       LastName: this.signupForm.value.userData.LastName,
       Email: this.signupForm.value.userData.Email,
@@ -72,7 +107,7 @@ export class DialogContentComponent implements OnInit {
       Gender: this.signupForm.value.userData.Gender,
       Dept: this.signupForm.value.userData.Dept,
       HireDate: this.signupForm.value.userData.HireDate == "" ? "" : this.datePipe.transform( this.signupForm.value.userData.HireDate, 'yyyy-MM-dd'),
-      //HireDate: this.signupForm.value.userData.hireDate,
+     
     })
       .subscribe(
         res => {
@@ -82,12 +117,11 @@ export class DialogContentComponent implements OnInit {
           this.notificationService.success(':: Submitted successfully');
         },
         err => {
-         // this.notificationService.success(':: Data Not Submitted');
+         this.notificationService.success(':: Data Not Submitted');
           console.log('Error occured');
           this.result = ' Registration was not successful'
         }
       );
+    }
   }
-
-  
 }
