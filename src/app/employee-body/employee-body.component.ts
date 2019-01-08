@@ -29,7 +29,7 @@ export class EmployeeBodyComponent implements OnInit {
   }
 
   getData() {
-    this.http.get('http://localhost:3000/emp/getAllEmployees')
+    this.http.get('http://localhost:5000/emp/getAllEmployees')
     .subscribe((response) => {
       this.EmployeeDetails = response as string[];
       this.rows = response;
@@ -53,7 +53,7 @@ export class EmployeeBodyComponent implements OnInit {
       this.getData()
     });
   }
-  
+
   //method to search records
   updateFilter() {
     this.listData.filter = this.searchKey.trim().toLowerCase();
@@ -76,9 +76,11 @@ export class EmployeeBodyComponent implements OnInit {
   onDelete(Id) {
     if (confirm('Are you sure to delete this record ?')) {
       //this.service.deleteEmployee(Id);
-      this.http.delete('http://localhost:3000/emp/deleteEmp/' + Id )
+      this.http.delete('http://localhost:5000/emp/deleteemployee/' + Id )
       .subscribe(data => { }),
-      this.ngOnInit();
+      // this.ngOnInit();
+      this.notificationService.success(':: Data Deleted Successfully');
+      this.getData();
     };
     }
 
