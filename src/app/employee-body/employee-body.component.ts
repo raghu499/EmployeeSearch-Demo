@@ -16,29 +16,29 @@ export class EmployeeBodyComponent implements OnInit {
 
   //filtered data displaying conditions
   listData: MatTableDataSource<any>;
-  displayedColumns: string[] = ['Id','FirstName', 'LastName','Email', 'Phone', 'City', 'Dept', 'Actions'];
+  displayedColumns: string[] = ['Id', 'FirstName', 'LastName', 'Email', 'Phone', 'City', 'Dept', 'Actions'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
 
- 
+
   //to load the records when page is loaded
   ngOnInit() {
-    
+
     this.getData();
   }
 
   getData() {
     this.http.get('http://localhost:5000/emp/getAllEmployees')
-    .subscribe((response) => {
-      this.EmployeeDetails = response as string[];
-      this.rows = response;
-      //console.log(JSON.stringify(this.rows));
+      .subscribe((response) => {
+        this.EmployeeDetails = response as string[];
+        this.rows = response;
+        //console.log(JSON.stringify(this.rows));
 
-      this.listData = new MatTableDataSource(this.rows.employees);
-      this.listData.sort = this.sort;
-      this.listData.paginator = this.paginator;
-    });
+        this.listData = new MatTableDataSource(this.rows.employees);
+        this.listData.sort = this.sort;
+        this.listData.paginator = this.paginator;
+      });
   }
 
   //this method is for displaying the dialog box for registring the new Employee
@@ -50,7 +50,10 @@ export class EmployeeBodyComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      this.getData()
+      // 
+      if(result === 'submitted') {
+        this.getData()
+      }
     });
   }
 
@@ -65,23 +68,25 @@ export class EmployeeBodyComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogContentComponent, {
       height: '500px',
       width: '800px',
-      data:row
+      data: row
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      if(result === 'updated') {
+        this.getData()
+      }
     });
   }
 
   //Method to call when delete button clicked
   onDelete(Id) {
     if (confirm('Are you sure to delete this record ?')) {
-      //this.service.deleteEmployee(Id);
-      this.http.delete('http://localhost:5000/emp/deleteemployee/' + Id )
-      .subscribe(data => { }),
-      // this.ngOnInit();
-      this.notificationService.success(':: Data Deleted Successfully');
-      this.getData();
-    };
+      this.http.delete('http://localhost:5000/emp/deleteemployee/' + Id)
+        .subscribe(data => {
+          this.notificationService.success(':: Data Deleted Successfully');
+          this.getData();
+         })
     }
+  }
 
 }

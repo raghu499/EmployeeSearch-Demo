@@ -1,6 +1,10 @@
 <div class="top">
-    
-<h1>Enter Employee Details <button  (click)="onClose()" style="float: right;"> <mat-icon>clear</mat-icon></button> </h1>
+
+  <h1 style="color:rgb(83, 120, 241);">Enter Employee Details
+    <button (click)="onClose()" style="float: right;">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </h1>
 
 </div>
 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
@@ -13,29 +17,38 @@
           <mat-form-field appearance="outline">
             <mat-label>First Name</mat-label>
             <input matInput id="fname" formControlName="FirstName" class="form-control">
-            <mat-hint><mat-error *ngIf="!signupForm.get('userData.FirstName').valid && signupForm.get('userData.FirstName').touched" class="help-block">Please Enter First Name</mat-error></mat-hint>
+            <mat-hint>
+              <mat-error *ngIf="!signupForm.get('userData.FirstName').valid && signupForm.get('userData.FirstName').touched"
+                class="help-block">Please Enter First Name</mat-error>
+            </mat-hint>
           </mat-form-field>
-          
+
           <mat-form-field appearance="outline">
             <mat-label>Last Name</mat-label>
             <input matInput id="lname" formControlName="LastName" class="form-control">
-            <mat-hint><mat-error *ngIf="!signupForm.get('userData.LastName').valid && signupForm.get('userData.LastName').touched" class="help-block">Please Enter Last Name</mat-error></mat-hint>
+            <mat-hint>
+              <mat-error *ngIf="!signupForm.get('userData.LastName').valid && signupForm.get('userData.LastName').touched"
+                class="help-block">Please Enter Last Name</mat-error>
+            </mat-hint>
           </mat-form-field>
-          
+
 
 
           <mat-form-field appearance="outline" class="example-container">
             <mat-label>Email Id</mat-label>
             <input matInput id="email" formControlName="Email" class="form-control">
-            <mat-hint><mat-error *ngIf="!signupForm.get('userData.Email').valid && signupForm.get('userData.Email').touched" class="help-block">Please enter a valid email!</mat-error> </mat-hint>
+            <mat-hint>
+              <mat-error *ngIf="!signupForm.get('userData.Email').valid && signupForm.get('userData.Email').touched" class="help-block">Please enter a valid email!</mat-error>
+            </mat-hint>
           </mat-form-field>
-          
+
 
           <mat-form-field appearance="outline">
             <mat-label>Mobile Number</mat-label>
-            <input matInput id="mobile" formControlName="Phone" class="form-control" >
-            <mat-hint>  <mat-error *ngIf="!signupForm.get('userData.Phone').valid && signupForm.get('userData.Phone').touched"
-               class="help-block">Please Enter Valid Mobile Number!</mat-error> </mat-hint>
+            <input matInput id="mobile" formControlName="Phone" class="form-control">
+            <mat-hint>
+              <mat-error *ngIf="!signupForm.get('userData.Phone').valid && signupForm.get('userData.Phone').touched" class="help-block">Please Enter Valid Mobile Number!</mat-error>
+            </mat-hint>
           </mat-form-field>
 
         </div>
@@ -47,14 +60,16 @@
           <mat-form-field appearance="outline">
             <mat-label>City</mat-label>
             <input matInput id="city" formControlName="City" class="form-control">
-            <mat-hint><mat-error *ngIf="!signupForm.get('userData.City').valid && signupForm.get('userData.City').touched" class="help-block">Please Enter City!</mat-error></mat-hint>
+            <mat-hint>
+              <mat-error *ngIf="!signupForm.get('userData.City').valid && signupForm.get('userData.City').touched" class="help-block">Please Enter City!</mat-error>
+            </mat-hint>
           </mat-form-field>
-          
+
           <div class="add-bottom-padding">
             <mat-radio-group formControlName="Gender">
               <mat-radio-button value="Male">Male</mat-radio-button>
               <mat-radio-button value="Female" style="margin-left: 20px;">Female </mat-radio-button>
-             
+
             </mat-radio-group>
           </div>
           <br />
@@ -75,11 +90,11 @@
           </mat-form-field>
 
           <br />
-          <div class="button-row" >
-            <button [disabled]="!signupForm.valid" class="button" style="background-color:rgb(14, 64, 230);" type="submit" mat-button>Submit</button>            
-<!-- <p>{{result}}</p> -->
-            <button mat-raised-button style="background-color:rgb(38, 211, 38); margin-left: 30px;" class="button" (click)="onClear()">Clear</button>
-           
+          <div class="button-row">
+            <button [disabled]="!signupForm.valid" class="button" style="background-color:rgb(9, 199, 9);;" type="submit" mat-button><b>Submit</b></button>
+            <!-- <p>{{result}}</p> -->
+            <button mat-raised-button style="background-color:rgba(171, 172, 173, 0.938); margin-left: 30px;" class="button" (click)="onClear()"><b>Clear</b></button>
+
           </div>
           <!-- <p>{{result}}</p> -->
         </div>

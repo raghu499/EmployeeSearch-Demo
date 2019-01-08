@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { NotificationService } from './notification.service';
 import { EmployeeService } from './employee.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -19,13 +20,17 @@ import { EmployeeBodyComponent } from './employee-body/employee-body.component';
 import { DialogContentComponent } from './dialog-content/dialog-content.component';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { DatePipe } from '../../node_modules/@angular/common';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     EmployeeBodyComponent,
-    DialogContentComponent
+    DialogContentComponent,
+    LoginPageComponent,
+    SignupFormComponent
   ],
   imports: [
     BrowserModule,
@@ -55,8 +60,21 @@ import { DatePipe } from '../../node_modules/@angular/common';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatSnackBarModule
-    
+    MatSnackBarModule,
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: LoginPageComponent
+      },
+      {
+        path: 'first',
+        component: EmployeeBodyComponent
+      },
+      {
+        path: 'signup',
+        component: SignupFormComponent
+      }
+    ])
   ],
   entryComponents: [
     DialogContentComponent

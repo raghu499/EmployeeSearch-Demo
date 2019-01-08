@@ -17,10 +17,10 @@ export class DialogContentComponent implements OnInit {
   selected = 'Dev';
   EmployeeDetails: string[];
   rows;
-  
+
   constructor(private service: EmployeeService, private notificationService: NotificationService, public dialogRef: MatDialogRef<DialogContentComponent>, private http: HttpClient, private datePipe: DatePipe, @Inject(MAT_DIALOG_DATA) public data: any) { }
   listData: MatTableDataSource<any>;
-  displayedColumns: string[] = ['Id','FirstName', 'LastName','Email', 'Phone', 'City', 'Dept', 'Actions'];
+  displayedColumns: string[] = ['Id', 'FirstName', 'LastName', 'Email', 'Phone', 'City', 'Dept', 'Actions'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   onClose() {
@@ -31,14 +31,14 @@ export class DialogContentComponent implements OnInit {
 
   onClear() {
     this.signupForm.reset();
-    this.notificationService.success('Data Cleared Successfully..');
+    this.notificationService.success('Data Has been Reset Successfully..');
   }
   result = '';
 
   signupForm: FormGroup;
   //here we are validating the input fields
   ngOnInit() {
-    
+
     this.signupForm = new FormGroup({
       'userData': new FormGroup({
         'Id': new FormControl(null),
@@ -70,25 +70,14 @@ export class DialogContentComponent implements OnInit {
       Dept: employee.Dept,
       HireDate: employee.HireDate == "" ? "" : this.datePipe.transform(employee.HireDate, 'yyyy-MM-dd'),
     })
-    console.log("FillForm", this.signupForm.value.userData.FirstName)
-    console.log("with data", this.data.Id)
+    // console.log("FillForm", this.signupForm.value.userData.FirstName)
+    // console.log("with data", this.data.Id)
   }
-  getData() {
-    this.http.get('http://localhost:5000/emp/getAllEmployees')
-    .subscribe((response) => {
-      this.EmployeeDetails = response as string[];
-      this.rows = response;
-      //console.log(JSON.stringify(this.rows));
-
-      this.listData = new MatTableDataSource(this.rows.employees);
-      this.listData.sort = this.sort;
-      this.listData.paginator = this.paginator;
-    });
-  }
+ 
   //In this method we will post the data to the target URL with input data.
   onSubmit() {
     //if(this.data.Id !== null || this.data.Id !== undefined) {
-    if (this.data !== null) {
+    if (this.data !== null ) {
       //put
       console.log("when ID is present", this.data.Id);
       this.http.put('http://localhost:5000/emp/updateEmployee/' + this.data.Id, {
@@ -105,10 +94,9 @@ export class DialogContentComponent implements OnInit {
       }).subscribe(
         res => {
           console.log(res);
-          this.getData();
           this.result = 'Registration was Successful...'
-          this.dialogRef.close();
           this.notificationService.success(':: Submitted successfully');
+          this.dialogRef.close("updated");
         },
         err => {
           this.notificationService.success(':: Data Not Updated');
@@ -133,9 +121,8 @@ export class DialogContentComponent implements OnInit {
         .subscribe(
           res => {
             console.log(res);
-            this.getData();
             this.result = 'Registration was Successful...'
-            this.dialogRef.close();
+            this.dialogRef.close("submitted");
             this.notificationService.success(':: Submitted successfully');
           },
           err => {
