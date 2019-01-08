@@ -1,14 +1,16 @@
 <div class="login-box">
   <img src="assets/img/avatar.png" class="avatar">
   <h1>Login Here</h1>
-  <form>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
     <p>Username</p>
-    <input type="text" name="username" placeholder="Enter Username">
+    <input type="text" formControlName="username" placeholder="Enter Username">
+    <mat-error *ngIf="!signupForm.get('username').valid && signupForm.get('username').touched"
+                class="help-block">Please Enter First Name</mat-error>
     <p>Password</p>
-    <input type="password" name="password" placeholder="Enter Password">
-    <input type="submit" name="submit" value="Login" (click)="onLogin()">
-    <a routerLink="/signup">Signup Form</a>
+    <input type="password" formControlName="password" placeholder="Enter Password">
+    <mat-error *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched"
+                class="help-block">Please Enter Password</mat-error>
+    <input type="submit" name="submit" value="Login" [disabled]="!signupForm.valid">
+    
   </form>
-
-
 </div>

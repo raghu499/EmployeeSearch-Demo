@@ -21,7 +21,6 @@ import { DialogContentComponent } from './dialog-content/dialog-content.componen
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { DatePipe } from '../../node_modules/@angular/common';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { SignupFormComponent } from './signup-form/signup-form.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +28,7 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
     ToolbarComponent,
     EmployeeBodyComponent,
     DialogContentComponent,
-    LoginPageComponent,
-    SignupFormComponent
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -69,10 +67,6 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
       {
         path: 'first',
         component: EmployeeBodyComponent
-      },
-      {
-        path: 'signup',
-        component: SignupFormComponent
       }
     ])
   ],
