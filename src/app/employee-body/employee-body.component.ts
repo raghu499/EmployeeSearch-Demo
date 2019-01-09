@@ -1,8 +1,9 @@
+import { LoginPageComponent } from './../login-page/login-page.component';
 import { NotificationService } from './../notification.service';
 import { EmployeeService } from './../employee.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { DialogContentComponent } from './../dialog-content/dialog-content.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 @Component({
   selector: 'app-employee-body',
@@ -12,6 +13,9 @@ import { MatDialog, MatDialogConfig, MatTableDataSource, MatSort, MatPaginator }
 export class EmployeeBodyComponent implements OnInit {
   EmployeeDetails: string[];
   rows;
+  @Input() login:LoginPageComponent;
+  
+    
   constructor(public dialog: MatDialog, private http: HttpClient, private service: EmployeeService, private notificationService: NotificationService) { }
 
   //filtered data displaying conditions
@@ -26,8 +30,9 @@ export class EmployeeBodyComponent implements OnInit {
   ngOnInit() {
 
     this.getData();
+    // this.login.text();
   }
-
+  
   getData() {
     this.http.get('http://localhost:5000/emp/getAllEmployees')
       .subscribe((response) => {

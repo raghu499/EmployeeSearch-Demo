@@ -1,16 +1,14 @@
 <div class="login-box">
   <img src="assets/img/avatar.png" class="avatar">
   <h1>Login Here</h1>
-  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit(username1,password1)">
     <p>Username</p>
-    <input type="text" formControlName="username" placeholder="Enter Username">
-    <mat-error *ngIf="!signupForm.get('username').valid && signupForm.get('username').touched"
-                class="help-block">Please Enter First Name</mat-error>
+    <input type="text" formControlName="username1" placeholder="Enter Username" [(ngModel)]="username1">
+    <mat-error *ngIf="!signupForm.get('username1').valid && signupForm.get('username1').touched" class="help-block">Please Enter First Name</mat-error>
     <p>Password</p>
-    <input type="password" formControlName="password" placeholder="Enter Password">
-    <mat-error *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched"
-                class="help-block">Please Enter Password</mat-error>
+    <input type="password" formControlName="password1" placeholder="Enter Password" [(ngModel)]="password1">
+    <mat-error *ngIf="!signupForm.get('password1').valid && signupForm.get('password1').touched" class="help-block">Please Enter Password</mat-error>
     <input type="submit" name="submit" value="Login" [disabled]="!signupForm.valid">
-    
+
   </form>
 </div>

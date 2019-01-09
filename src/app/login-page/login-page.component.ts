@@ -1,3 +1,5 @@
+import { EmployeeService } from './../employee.service';
+import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -10,18 +12,22 @@ import { fillProperties } from '../../../node_modules/@angular/core/src/util/pro
 })
 export class LoginPageComponent implements OnInit {
   signupForm: FormGroup;
-  constructor( private router: Router) { }
+  EmployeeDetails: string[];
+  rows;
+  constructor( private router: Router,private http: HttpClient,private service: EmployeeService) { }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      'username': new FormControl(null,Validators.required),
-      'password': new FormControl(null,[Validators.required, Validators.maxLength(20), Validators.minLength(6)])
+      'username1': new FormControl(null,Validators.required),
+      'password1': new FormControl(null,[Validators.required, Validators.maxLength(20), Validators.minLength(6)])
     });
   }
 
-  onSubmit(){
-
-    // console.log(signupForm.username)
-    this.router.navigateByUrl('/first');
+  onSubmit(usrename1,password1){
+  console.log(usrename1);
+  console.log(password1);
+    this.service.getLoginData(usrename1,password1);
+    //this.router.navigateByUrl('/first');
+   // console.log("login username",this.signupForm.value.username);
   }
 }

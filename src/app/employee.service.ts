@@ -1,3 +1,4 @@
+import { NotificationService } from './notification.service';
 import { element } from 'protractor';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -5,13 +6,18 @@ import { Injectable } from '@angular/core';
 import { DatePipe } from '../../node_modules/@angular/common';
 import * as _ from 'lodash';
 import { fillProperties } from '../../node_modules/@angular/core/src/util/property';
+import { Router } from '../../node_modules/@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
 result;
-  constructor(private http: HttpClient,private datePipe: DatePipe) { }
+userName;
+pwd;
+
+obj;
+  constructor(private router: Router,private http: HttpClient,private datePipe: DatePipe,private notificationService: NotificationService) { }
   employeeList: String[];
   rows;
 
@@ -97,6 +103,36 @@ result;
     this.http.delete('http://localhost:3000/delete/' + $empid )
     .subscribe(data => { });
   }
+
+  getLoginData(username1,password1) {
+    this.http.get('http://localhost:5000/login/loginEmployee/' +username1+  '/' +password1)
+     .subscribe(
+          (data) => {
+          this.obj = data;
+      
+          this.userName = this.obj.data.username;
+          this.pwd = this.obj.data.password;
+          //console.log("dfsdfsdfds",this.obj.data.username);
+          //console.log(this.password);
+          if (this.userName == username1 && this.pwd == password1) {
+          this.router.navigateByUrl('/first');
+          this.notificationService.success('::You have been Logged in Successfully...');
+          }
+          else {
+          alert("Please enter correct username and password ");
+          }
+          },
+          err => {
+          console.log('Error occured');
+          this.notificationService.warn('::Please enter correct username and password...');
+          this.router.navigateByUrl('/');
+          
+          });
+
+  }
+
+
+
 
   populateForm(employee) {
     // this.form.setValue(_.omit(employee,'departmentName'));

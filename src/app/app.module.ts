@@ -22,6 +22,8 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { DatePipe } from '../../node_modules/@angular/common';
 import { LoginPageComponent } from './login-page/login-page.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +66,16 @@ import { LoginPageComponent } from './login-page/login-page.component';
         path: '',
         component: LoginPageComponent
       },
+      {
+        path: 'login',
+        component: LoginPageComponent
+      },
+        // children: [
+        //   {
+        //     path: 'login/first',
+        //     component: EmployeeBodyComponent,
+        //   },
+        // ]}
       {
         path: 'first',
         component: EmployeeBodyComponent

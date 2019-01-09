@@ -1,8 +1,22 @@
+<!-- <head>
+
+  <script type= "text/javascript">
+   function preback(){window.history.forward();}
+   setTimeout("preback()",0);
+   window.onload=function(){null};
+  </script>
+</head> -->
+
+
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span style="font-size:160%;">Employee Search</span>
-    <div class="empimg" style=" position: relative; top: 5px; right: -1247px; ">
+   
+    <div class="empimg" style=" position: relative; top: 5px; left:-15px; ">
       <img  width="60px"  height="60px" src="assets/img/empimg.jpg">
+    </div>
+    <span style="font-size:160%;">Employee Search</span>
+    <div class="logout" style="position:absolute; top:20px; right:20px;">
+      <button mat-stroked-button color="accent" (click)="onLogout()"><h1>Logout</h1></button>    
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

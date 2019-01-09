@@ -2,7 +2,7 @@ import { NotificationService } from './../notification.service';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '../../../node_modules/@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, throwMatDialogContentAlreadyAttachedError } from '../../../node_modules/@angular/material';
 import { DatePipe } from '../../../node_modules/@angular/common';
 import { EmployeeService } from './../employee.service';
 import { MatDialog, MatDialogConfig, MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
@@ -32,6 +32,7 @@ export class DialogContentComponent implements OnInit {
   onClear() {
     this.signupForm.reset();
     this.notificationService.success('Data Has been Reset Successfully..');
+    // alert("Cleared")
   }
   result = '';
 
@@ -70,16 +71,16 @@ export class DialogContentComponent implements OnInit {
       Dept: employee.Dept,
       HireDate: employee.HireDate == "" ? "" : this.datePipe.transform(employee.HireDate, 'yyyy-MM-dd'),
     })
-    // console.log("FillForm", this.signupForm.value.userData.FirstName)
+    //console.log("FillForm", this.signupForm.value.userData.Id)
     // console.log("with data", this.data.Id)
   }
- 
+
   //In this method we will post the data to the target URL with input data.
   onSubmit() {
-    //if(this.data.Id !== null || this.data.Id !== undefined) {
-    if (this.data !== null ) {
+    // if(this.data.Id !== null || this.data.Id !== undefined) {
+    if (this.data !== null) {
       //put
-      console.log("when ID is present", this.data.Id);
+      
       this.http.put('http://localhost:5000/emp/updateEmployee/' + this.data.Id, {
         //Id:this.signupForm.value.userData.Id,
         FirstName: this.signupForm.value.userData.FirstName,
@@ -106,6 +107,7 @@ export class DialogContentComponent implements OnInit {
       );
 
     } else {
+
       //post
       this.http.post('http://localhost:5000/emp/insertEmployee', {
         FirstName: this.signupForm.value.userData.FirstName,
@@ -131,6 +133,8 @@ export class DialogContentComponent implements OnInit {
             this.result = ' Registration was not successful'
           }
         );
+
     }
+
   }
 }
