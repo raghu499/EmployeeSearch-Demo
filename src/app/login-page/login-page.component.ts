@@ -1,3 +1,4 @@
+
 import { EmployeeService } from './../employee.service';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -14,7 +15,7 @@ export class LoginPageComponent implements OnInit {
   signupForm: FormGroup;
   EmployeeDetails: string[];
   rows;
-  constructor(private location: PlatformLocation,private router: Router,private http: HttpClient,private service: EmployeeService) { }
+  constructor( private location: PlatformLocation,private router: Router,private http: HttpClient,private service: EmployeeService) { }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
@@ -31,6 +32,7 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit(usrename1,password1){
     this.service.getLoginData(usrename1,password1);
+   
   }
 
   

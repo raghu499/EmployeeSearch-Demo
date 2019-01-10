@@ -1,3 +1,5 @@
+import { LogoutService } from './logout.service';
+import { AuthGuard } from './auth.guard';
 import { RouterModule } from '@angular/router';
 import { NotificationService } from './notification.service';
 import { EmployeeService } from './employee.service';
@@ -65,6 +67,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
       {
         path: '',
         component: LoginPageComponent
+       
       },
       {
         path: 'login',
@@ -78,14 +81,15 @@ import { LoginPageComponent } from './login-page/login-page.component';
         // ]}
       {
         path: 'first',
-        component: EmployeeBodyComponent
+        component: EmployeeBodyComponent,
+        canActivate: [AuthGuard]
       }
     ])
   ],
   entryComponents: [
     DialogContentComponent
   ],
-  providers: [DatePipe,EmployeeService,NotificationService],
+  providers: [DatePipe,EmployeeService,NotificationService,AuthGuard,LogoutService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 body{
     margin: 0;
     padding: 0;
-    
+    background: url(data:assets/img/image.jpg);
     background-size: cover;
     background-position: center;
     font-family: sans-serif;
@@ -9,7 +9,7 @@ body{
 .login-box{
     width: 320px;
     height: 420px;
-    background: rgba(223, 219, 219, 0.5);
+    background: rgba(1, 9, 12, 0.842);
     color: #fff;
     top: 50%;
     left: 50%;
@@ -77,3 +77,12 @@ h1{
 {
     color: #39dc79;
 }
+
+::placeholder {
+    color: rgb(255,255, 255);
+    font-size: 1em;
+    
+  }
+  h1{
+    color:rgb(255,255,255);
+  }

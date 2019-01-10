@@ -2,13 +2,19 @@
   <img src="assets/img/avatar.png" class="avatar">
   <h1>Login Here</h1>
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit(username1,password1)">
-    <p>Username</p>
-    <input type="text" formControlName="username1" placeholder="Enter Username" [(ngModel)]="username1">
-    <mat-error *ngIf="!signupForm.get('username1').valid && signupForm.get('username1').touched" class="help-block">Please Enter First Name</mat-error>
-    <p>Password</p>
-    <input type="password" formControlName="password1" placeholder="Enter Password" [(ngModel)]="password1">
+    <!-- <p>Username</p> -->
+    <input matInput type="text" formControlName="username1" placeholder="Enter Username" [(ngModel)]="username1">
+    <mat-error *ngIf="!signupForm.get('username1').valid && signupForm.get('username1').touched" class="help-block">Please Enter User Name</mat-error>
+    <br />
+    <br />
+    <!-- <p>Password</p> -->
+    <input  matInput type="password" formControlName="password1" placeholder="Enter Password" [(ngModel)]="password1">
     <mat-error *ngIf="!signupForm.get('password1').valid && signupForm.get('password1').touched" class="help-block">Please Enter Password</mat-error>
+    <br />
+    <br />
     <input type="submit" name="submit" value="Login" [disabled]="!signupForm.valid">
-
+  
   </form>
-</div>
+</div> 
+<!-- <img src="assets/img/image.jpg"> -->
+<img src="assets/img/loginimage.jpg">

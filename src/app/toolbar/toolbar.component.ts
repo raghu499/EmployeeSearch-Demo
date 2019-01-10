@@ -1,3 +1,5 @@
+import { EmployeeService } from './../employee.service';
+import { LogoutService } from './../logout.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,14 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit {
-
-  constructor( private router: Router) { }
+  welcome;
+  constructor( private lgoinservice:LogoutService,private router: Router,private service: EmployeeService) { }
 
   ngOnInit() {
+    this.welcome=this.service.userName;
   }
 
   onLogout(){
+localStorage.removeItem('username')
     this.router.navigateByUrl('');
+    
     
   }
 

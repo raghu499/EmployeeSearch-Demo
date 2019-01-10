@@ -105,6 +105,7 @@ obj;
   }
 
   getLoginData(username1,password1) {
+    localStorage.setItem('username1',"admin");
     this.http.get('http://localhost:5000/login/loginEmployee/' +username1+  '/' +password1)
      .subscribe(
           (data) => {
@@ -112,6 +113,9 @@ obj;
       
           this.userName = this.obj.data.username;
           this.pwd = this.obj.data.password;
+          localStorage.setItem('username',"admin");
+
+          
           //console.log("dfsdfsdfds",this.obj.data.username);
           //console.log(this.password);
           if (this.userName == username1 && this.pwd == password1) {

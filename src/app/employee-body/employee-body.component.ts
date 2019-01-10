@@ -17,7 +17,7 @@ export class EmployeeBodyComponent implements OnInit {
   
     
   constructor(public dialog: MatDialog, private http: HttpClient, private service: EmployeeService, private notificationService: NotificationService) { }
-
+ 
   //filtered data displaying conditions
   listData: MatTableDataSource<any>;
   displayedColumns: string[] = ['Id', 'FirstName', 'LastName', 'Email', 'Phone', 'City', 'Dept', 'Actions'];
@@ -31,6 +31,7 @@ export class EmployeeBodyComponent implements OnInit {
 
     this.getData();
     // this.login.text();
+    
   }
   
   getData() {
@@ -93,5 +94,7 @@ export class EmployeeBodyComponent implements OnInit {
          })
     }
   }
+
+
 
 }
