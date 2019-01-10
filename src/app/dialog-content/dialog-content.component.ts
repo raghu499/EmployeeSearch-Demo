@@ -31,7 +31,7 @@ export class DialogContentComponent implements OnInit {
 
   onClear() {
     this.signupForm.reset();
-    this.notificationService.success('Data Has been Reset Successfully..');
+    this.notificationService.warn('Data Has been Reset Successfully..');
     // alert("Cleared")
   }
   result = '';
