@@ -16,11 +16,12 @@ export class LoginPageComponent implements OnInit {
   EmployeeDetails: string[];
   rows;
   constructor( private location: PlatformLocation,private router: Router,private http: HttpClient,private service: EmployeeService) { }
-
+  
   ngOnInit() {
     this.signupForm = new FormGroup({
       'username1': new FormControl(null,Validators.required),
       'password1': new FormControl(null,[Validators.required, Validators.maxLength(20), Validators.minLength(6)])
+      
     });
 
     // location.onpopstate(() => {
@@ -32,7 +33,7 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit(usrename1,password1){
     this.service.getLoginData(usrename1,password1);
-   
+    // console.log(this.signupForm.value.username1);
   }
 
   

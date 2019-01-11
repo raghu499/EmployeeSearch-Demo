@@ -47,93 +47,124 @@ obj;
     });
   }
 
-  getEmployees() {
-    this.http.get('http://172.17.20.19:3000/getProducts')
-    .subscribe((response) => {
-      this.employeeList = response as string[];
-      this.rows = response;
-      console.log(this.rows);
-    },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log('Client-side error occured.');
-        } else {
-          console.log('Server-side error occured.');
-        }
-      });
+  // getEmployees() {
+  //   this.http.get('http://172.17.20.19:3000/getProducts')
+  //   .subscribe((response) => {
+  //     this.employeeList = response as string[];
+  //     this.rows = response;
+  //     console.log(this.rows);
+  //   },
+  //     (err: HttpErrorResponse) => {
+  //       if (err.error instanceof Error) {
+  //         console.log('Client-side error occured.');
+  //       } else {
+  //         console.log('Server-side error occured.');
+  //       }
+  //     });
     
-      //need to write return  ?
-  }
+  //     //need to write return  ?
+  // }
 
-  insertEmployee(employee) {
-    this.http.post('http://localhost:3000/emp/insertEmployee', {
-      Id:employee.Id,
-      FirstName: employee.FirstName,
-      LastName: employee.LastName,
-      Email: employee.Email,
-      Phone: employee.Phone,
-      City : employee.City,
-      Gender: employee.Gender,
-      Dept: employee.Dept,
-      HireDate: employee.HireDate == "" ? "" : this.datePipe.transform( employee.HireDate, 'yyyy-MM-dd'),
-    });    
-  }
+  // insertEmployee(employee) {
+  //   this.http.post('http://localhost:3000/emp/insertEmployee', {
+  //     Id:employee.Id,
+  //     FirstName: employee.FirstName,
+  //     LastName: employee.LastName,
+  //     Email: employee.Email,
+  //     Phone: employee.Phone,
+  //     City : employee.City,
+  //     Gender: employee.Gender,
+  //     Dept: employee.Dept,
+  //     HireDate: employee.HireDate == "" ? "" : this.datePipe.transform( employee.HireDate, 'yyyy-MM-dd'),
+  //   });    
+  // }
 
 
   // need to put the url for update  PUT method / EDIT button
-  updateEmployee(employee) {
+  // updateEmployee(employee) {
     
-    this.http.put('http://localhost:3000/emp/updateEmployee + employee.Id', {
-      Id:employee.Id,
-      FirstName: employee.FirstName,
-      LastName: employee.LastName,
-      Email: employee.Email,
-      Phone: employee.Phone,
-      City : employee.City,
-      Gender: employee.Gender,
-      Dept: employee.Dept,
-      HireDate: employee.HireDate == "" ? "" : this.datePipe.transform( employee.HireDate, 'yyyy-MM-dd'),
-    });    
+  //   this.http.put('http://localhost:3000/emp/updateEmployee + employee.Id', {
+  //     Id:employee.Id,
+  //     FirstName: employee.FirstName,
+  //     LastName: employee.LastName,
+  //     Email: employee.Email,
+  //     Phone: employee.Phone,
+  //     City : employee.City,
+  //     Gender: employee.Gender,
+  //     Dept: employee.Dept,
+  //     HireDate: employee.HireDate == "" ? "" : this.datePipe.transform( employee.HireDate, 'yyyy-MM-dd'),
+  //   });    
 
    
-  }
+  // }
 
 
-  deleteEmployee($empid: string) {
-    this.http.delete('http://localhost:3000/delete/' + $empid )
-    .subscribe(data => { });
-  }
+  // deleteEmployee($empid: string) {
+  //   this.http.delete('http://localhost:3000/delete/' + $empid )
+  //   .subscribe(data => { });
+  // }
+
+  // getLoginData(username1,password1) {
+  //   //localStorage.setItem('username1',"admin");
+  //   this.http.get('http://localhost:5000/login/loginEmployee/' +username1+  '/' +password1)
+  //    .subscribe(
+  //         (data) => {
+  //         this.obj = data;
+      
+  //         this.userName = this.obj.data.username;
+  //         this.pwd = this.obj.data.password;
+  //         localStorage.setItem('username',"admin");
+
+
+  //         //console.log("dfsdfsdfds",this.obj.data.username);
+  //         //console.log(this.password);
+  //         if (this.userName == username1 && this.pwd == password1) {
+  //         this.router.navigateByUrl('/first');
+  //         this.notificationService.success('::You have been Logged in Successfully...');
+  //         }
+  //         else {
+  //         alert("Please enter correct username and password ");
+  //         }
+  //         },
+  //         err => {
+  //         console.log('Error occured');
+  //         this.notificationService.warn('::Please enter correct username and password...');
+  //         this.router.navigateByUrl('/');
+          
+  //         });
+
+  // }
 
   getLoginData(username1,password1) {
-    localStorage.setItem('username1',"admin");
-    this.http.get('http://localhost:5000/login/loginEmployee/' +username1+  '/' +password1)
-     .subscribe(
-          (data) => {
-          this.obj = data;
-      
+    //console.log("Testing",username1)
+    this.http.post('http://localhost:5000/login/loginEmployee/', {
+            username: username1,
+            password: password1,
+          })
+            .subscribe(
+              res => {
+                console.log(res);
+          this.obj = res;
           this.userName = this.obj.data.username;
-          this.pwd = this.obj.data.password;
-          localStorage.setItem('username',"admin");
-
-          
-          //console.log("dfsdfsdfds",this.obj.data.username);
-          //console.log(this.password);
-          if (this.userName == username1 && this.pwd == password1) {
-          this.router.navigateByUrl('/first');
-          this.notificationService.success('::You have been Logged in Successfully...');
-          }
-          else {
-          alert("Please enter correct username and password ");
-          }
-          },
-          err => {
-          console.log('Error occured');
-          this.notificationService.warn('::Please enter correct username and password...');
-          this.router.navigateByUrl('/');
-          
-          });
-
-  }
+                this.pwd = this.obj.data.password;
+              localStorage.setItem('username',"admin");
+           if (this.userName == username1 && this.pwd == password1) {
+              this.router.navigateByUrl('/first');
+              this.notificationService.success('::You have been Logged in Successfully...');
+               }
+           
+              else {
+              alert("Please enter correct username and password ");
+              }
+              },
+              err => {
+              console.log('Error occured');
+              this.notificationService.warn('::Please enter correct username and password...');
+              this.router.navigateByUrl('/');
+              
+              });
+    
+    }
 
 
 

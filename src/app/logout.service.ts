@@ -8,7 +8,7 @@ export class LogoutService {
   constructor() { }
   checkusernameandpassword(uname: string, pwd: string) {
     if (uname == "admin" && pwd == "admin123") {
-      localStorage.setItem('username', "admin");
+     // localStorage.setItem('username', "admin");
       return true;
     }
     else {
