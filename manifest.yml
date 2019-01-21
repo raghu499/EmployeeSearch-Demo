@@ -1,0 +1,5 @@
+---
+applications:
+- name: EmpSearch
+  memory: 512M
+  instances: 1

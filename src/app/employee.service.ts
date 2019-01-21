@@ -137,7 +137,7 @@ obj;
 
   getLoginData(username1,password1) {
     //console.log("Testing",username1)
-    this.http.post('http://localhost:5000/login/loginEmployee/', {
+    this.http.post('https://training-nodejs.cfapps.io/login/loginEmployee/', {
             username: username1,
             password: password1,
           })

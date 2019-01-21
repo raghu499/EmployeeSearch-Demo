@@ -35,7 +35,7 @@ export class EmployeeBodyComponent implements OnInit {
   }
   
   getData() {
-    this.http.get('http://localhost:5000/emp/getAllEmployees')
+    this.http.get('https://training-nodejs.cfapps.io/emp/getAllEmployees')
       .subscribe((response) => {
         this.EmployeeDetails = response as string[];
         this.rows = response;
@@ -87,7 +87,7 @@ export class EmployeeBodyComponent implements OnInit {
   //Method to call when delete button clicked
   onDelete(Id) {
     if (confirm('Are you sure to delete this record ?')) {
-      this.http.delete('http://localhost:5000/emp/deleteemployee/' + Id)
+      this.http.delete('https://training-nodejs.cfapps.io/emp/deleteemployee/' + Id)
         .subscribe(data => {
           this.notificationService.success(':: Data Deleted Successfully');
           this.getData();

@@ -56,6 +56,7 @@ export class DialogContentComponent implements OnInit {
     });
     if (this.data) {
       this.fillForm(this.data);
+      
     }
   }
 
@@ -81,7 +82,7 @@ export class DialogContentComponent implements OnInit {
     if (this.data !== null) {
       //put
       
-      this.http.put('http://localhost:5000/emp/updateEmployee/' + this.data.Id, {
+      this.http.put('https://training-nodejs.cfapps.io/emp/updateEmployee/' + this.data.Id, {
         //Id:this.signupForm.value.userData.Id,
         FirstName: this.signupForm.value.userData.FirstName,
         LastName: this.signupForm.value.userData.LastName,
@@ -105,11 +106,11 @@ export class DialogContentComponent implements OnInit {
           this.result = ' Registration was not successful'
         }
       );
-
+      
     } else {
 
       //post
-      this.http.post('http://localhost:5000/emp/insertEmployee', {
+      this.http.post('https://training-nodejs.cfapps.io/emp/insertEmployee', {
         FirstName: this.signupForm.value.userData.FirstName,
         LastName: this.signupForm.value.userData.LastName,
         Email: this.signupForm.value.userData.Email,

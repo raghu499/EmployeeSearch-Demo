@@ -15,6 +15,8 @@ export class LoginPageComponent implements OnInit {
   signupForm: FormGroup;
   EmployeeDetails: string[];
   rows;
+  // username1;
+  // password1;
   constructor( private location: PlatformLocation,private router: Router,private http: HttpClient,private service: EmployeeService) { }
   
   ngOnInit() {
